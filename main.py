@@ -1,8 +1,10 @@
-from wod import get_wod, get_wod_info, send_email
+from wod import get_wod, get_wod_info, send_email, db_conn, insert_row
 
 
 def main():
     wod = get_wod()
+    conn, cursor = db_conn()
+    insert_row(conn, cursor, datetime.date.today(), wod, word_type, pronunciation, short_def)
     short_def, pronunciation, word_type = get_wod_info(wod)
     send_email(wod, word_type, pronunciation, short_def)
 
