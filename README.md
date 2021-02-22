@@ -7,3 +7,4 @@ If you are using gmail, create an app password and use that in this script.
 You will also need to register with https://dictionaryapi.com to get an api key.
 
 # Email Example
+![Email Image](wod_email_example.PNG)
