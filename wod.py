@@ -4,6 +4,8 @@ import json
 import smtplib
 from smtplib import SMTPException
 import datetime
+import mariadb
+import sys
 
 
 def get_wod():
@@ -65,3 +67,30 @@ Subject: Merriam Webster's Word of the Day
         print('Something went wrong...')
 
     return None
+    
+ 
+ def db_conn():
+    try:
+        conn = mariadb.connect(
+            user="pi",
+            password="secret",
+            host="localhost",
+            port=3306,
+            database="dbname"
+
+        )
+    except mariadb.Error as e:
+        print(f"Error connecting to MariaDB Platform: {e}")
+        sys.exit(1)
+
+    # Get Cursor
+    cursor = conn.cursor()
+    return conn, cursor
+
+
+def insert_row(conn, cursor, day, word, word_type, pronunciation, definition):
+    cursor.execute(
+        """INSERT INTO word_of_the_day.wod_tbl (Day, Word, WordType, Pronunciation, Definition) VALUES 
+        (?, ?, ?, ?, ?)""", (day, word, word_type, pronunciation, definition))
+    conn.commit()
+
