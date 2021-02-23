@@ -22,13 +22,15 @@ def get_wod_info(wod):
     url = f"https://www.dictionaryapi.com/api/v3/references/collegiate/json/{wod}?key=secret"
     r = requests.get(url)
     r = json.loads(r.text)
-    short_def = str(r[0]['shortdef'][0])
+    short_def = r[0]['shortdef']
     pronunciation = str(r[0]['hwi']['prs'][0]['mw'])
     word_type = str(r[0]['fl'])
     return short_def, pronunciation, word_type
 
 
 def send_email(wod, word_type, pronunciation, short_def):
+    def_p_tag = [f'<li style="font-size: 20px; color: white;">{item}</li>' for item in short_def]
+    def_p_tag = ''.join(def_p_tag)
     gmail_user = 'email@gmail.com'
     gmail_password = 'secret'
     receiver = ['email@gmail.com', 'email@protonmail.com']
@@ -51,8 +53,11 @@ Subject: Merriam Webster's Word of the Day
         <p style="font-size: 55px; color: white; font-family: Georgia, serif;">{wod}</p>
         <p style="font-size: 20px;"><i>{word_type}</i> | {pronunciation}</p>
         <hr>
-        <p style="font-size: 20px;">{short_def}</p>
-    </div>  
+    </div>
+    <p style="font-size: 25px; color: white; padding-left: 10px;">Definitions: </p>
+    <ol style="max-width: 800px; margin-right: auto; margin-left: auto;"> 
+    {def_p_tag} 
+    </ol>
 </div>  
 </body>
 </html>"""
