@@ -4,7 +4,8 @@ This script uses bs4, smtplib, requests, and a couple other standard libraries t
 # To use
 Change the sender and receiver as well as the authentication for your smtp sever.
 If you are using gmail, create an app password and use that in this script.
-You will also need to register with https://dictionaryapi.com to get an api key. 
+You will also need to register with https://dictionaryapi.com to get an api key.
+Create a mariadb database and create a new table and include the info in the db_conn() function in wod.py
 
 # Email Example
 ![Email Image](wod_email_example.PNG)
