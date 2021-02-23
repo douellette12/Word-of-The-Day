@@ -1,5 +1,5 @@
 # Word of The Day
-This script ues bs4, smtplib, requests, and a couple other standard libraries to get Merriam Webster's word of the day from their public dictionary api. Sends an html email with the word, definition, pronunciation, and today's date. It also, connects to a mariadb mysql server and inserts a row into an existing database table.
+This script uses bs4, smtplib, requests, and a couple other standard libraries to get Merriam Webster's word of the day from their public dictionary api. It sends an html email with the word, definition, pronunciation, and today's date. It also, connects to a mariadb mysql server and inserts a row into an existing database table.
 
 # To use
 Change the sender and receiver as well as the authentication for your smtp sever.
